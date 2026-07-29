@@ -1,0 +1,26 @@
+{
+  "checkout-api-prod": [
+    {"ts": "2026-07-25T14:00:01Z", "level": "INFO", "msg": "request completed in 121ms"},
+    {"ts": "2026-07-25T14:00:05Z", "level": "INFO", "msg": "request completed in 118ms"},
+    {"ts": "2026-07-25T14:02:10Z", "level": "WARN", "msg": "connection pool at 80% capacity"},
+    {"ts": "2026-07-25T14:03:00Z", "level": "ERROR", "msg": "upstream call to payment-api timed out after 5000ms"},
+    {"ts": "2026-07-25T14:03:02Z", "level": "ERROR", "msg": "upstream call to payment-api timed out after 5000ms"},
+    {"ts": "2026-07-25T14:03:04Z", "level": "ERROR", "msg": "upstream call to payment-api timed out after 5000ms"},
+    {"ts": "2026-07-25T14:03:07Z", "level": "ERROR", "msg": "upstream call to payment-api timed out after 5000ms"},
+    {"ts": "2026-07-25T14:03:09Z", "level": "WARN", "msg": "retrying payment-api call (attempt 2/3)"},
+    {"ts": "2026-07-25T14:03:11Z", "level": "ERROR", "msg": "upstream call to payment-api timed out after 5000ms"},
+    {"ts": "2026-07-25T14:03:15Z", "level": "INFO", "msg": "request completed in 895ms"}
+  ],
+  "payment-api-prod": [
+    {"ts": "2026-07-25T14:00:01Z", "level": "INFO", "msg": "request completed in 96ms"},
+    {"ts": "2026-07-25T14:02:55Z", "level": "WARN", "msg": "db connection pool exhausted, queueing request"},
+    {"ts": "2026-07-25T14:02:58Z", "level": "WARN", "msg": "db connection pool exhausted, queueing request"},
+    {"ts": "2026-07-25T14:03:00Z", "level": "ERROR", "msg": "db connection acquisition timeout after 3000ms"},
+    {"ts": "2026-07-25T14:03:03Z", "level": "ERROR", "msg": "db connection acquisition timeout after 3000ms"},
+    {"ts": "2026-07-25T14:03:06Z", "level": "INFO", "msg": "request completed in 352ms"}
+  ],
+  "inventory-api-prod": [
+    {"ts": "2026-07-25T14:00:01Z", "level": "INFO", "msg": "request completed in 60ms"},
+    {"ts": "2026-07-25T14:01:00Z", "level": "INFO", "msg": "request completed in 61ms"}
+  ]
+}

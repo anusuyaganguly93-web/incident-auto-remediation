@@ -1,0 +1,35 @@
+{
+  "checkout-api": {
+    "log_stream": "checkout-api-prod",
+    "metric_namespace": "checkout_api",
+    "deploy_pipeline_id": "pipeline-checkout-001",
+    "db_identifiers": ["checkout-db-primary"],
+    "asg_names": ["asg-checkout-api-prod"],
+    "runbook_ids": ["rb-high-latency-001", "rb-oom-001"],
+    "owning_team": "payments-platform",
+    "criticality_tier": 1,
+    "depends_on": ["payment-api", "inventory-api"]
+  },
+  "payment-api": {
+    "log_stream": "payment-api-prod",
+    "metric_namespace": "payment_api",
+    "deploy_pipeline_id": "pipeline-payment-001",
+    "db_identifiers": ["payment-db-primary"],
+    "asg_names": ["asg-payment-api-prod"],
+    "runbook_ids": ["rb-high-latency-001", "rb-db-connection-pool-001"],
+    "owning_team": "payments-platform",
+    "criticality_tier": 1,
+    "depends_on": []
+  },
+  "inventory-api": {
+    "log_stream": "inventory-api-prod",
+    "metric_namespace": "inventory_api",
+    "deploy_pipeline_id": "pipeline-inventory-001",
+    "db_identifiers": ["inventory-db-primary"],
+    "asg_names": ["asg-inventory-api-prod"],
+    "runbook_ids": ["rb-high-error-rate-001"],
+    "owning_team": "catalog-team",
+    "criticality_tier": 2,
+    "depends_on": []
+  }
+}

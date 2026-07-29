@@ -1,0 +1,11 @@
+{
+  "pipeline-checkout-001": [
+    {"version": "v4.12.0", "deployed_at": "2026-07-24T09:00:00Z", "status": "success"}
+  ],
+  "pipeline-payment-001": [
+    {"version": "v2.8.3", "deployed_at": "2026-07-25T14:01:45Z", "status": "success"}
+  ],
+  "pipeline-inventory-001": [
+    {"version": "v1.3.0", "deployed_at": "2026-07-20T11:00:00Z", "status": "success"}
+  ]
+}

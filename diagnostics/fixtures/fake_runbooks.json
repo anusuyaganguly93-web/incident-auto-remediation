@@ -1,0 +1,30 @@
+[
+  {
+    "id": "rb-high-latency-001",
+    "title": "High latency due to downstream dependency timeout",
+    "keywords": ["latency", "timeout", "upstream", "downstream", "dependency", "slow"],
+    "summary": "When a service shows a latency spike correlated with a recent deploy to a dependency, check the dependency's connection pool and recent deploy first before restarting the alerting service itself.",
+    "suggested_commands": ["restart-pods", "rollback-deploy"]
+  },
+  {
+    "id": "rb-db-connection-pool-001",
+    "title": "Database connection pool exhaustion",
+    "keywords": ["connection pool", "db", "database", "exhausted", "acquisition timeout"],
+    "summary": "Connection pool exhaustion is usually resolved by scaling out replicas or rolling back a recent deploy that increased per-request connection usage.",
+    "suggested_commands": ["scale-out", "rollback-deploy"]
+  },
+  {
+    "id": "rb-oom-001",
+    "title": "Out of memory kills",
+    "keywords": ["oom", "memory", "killed", "restart loop"],
+    "summary": "OOM kills are typically resolved with a pod restart plus a memory limit increase if recurring.",
+    "suggested_commands": ["restart-pods"]
+  },
+  {
+    "id": "rb-high-error-rate-001",
+    "title": "Elevated error rate without deploy correlation",
+    "keywords": ["error rate", "5xx", "errors", "failures"],
+    "summary": "Elevated error rate with no recent deploy usually points to an external dependency or infrastructure issue outside the service's own deploy history.",
+    "suggested_commands": ["escalate-only"]
+  }
+]
