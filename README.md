@@ -9,9 +9,7 @@ time-to-first-action, at a steady-state load of 5,000 alerts/day.
 Built as a portfolio project to demonstrate systems design under real
 constraints (coordination-heavy, real-time, correctness-critical), not just
 "wire an LLM to some tools." See [`docs/architecture.md`](docs/architecture.md)
-for the full design rationale, and [`docs/DEBUGGING_LOG.md`](docs/DEBUGGING_LOG.md)
-for a chronological account of everything that broke during implementation
-and how it was fixed — including one genuine logic bug, found and fixed live.
+for the full design rationale.
 
 This README is organized **phase by phase**. Each phase section is
 self-contained: its own architecture diagram, how to run it, and exactly
@@ -97,7 +95,7 @@ target_app/           toy service standing in for checkout-api, chaos injection
 shared/                data contracts, fingerprinting, DB repos
 migrations/            Postgres schema (001-006, one per phase's new tables)
 tests/                  pytest suites, one file per phase's logic
-docs/                  architecture.md, DEBUGGING_LOG.md
+docs/                  architecture.md
 ```
 
 ## Prerequisites
@@ -190,7 +188,7 @@ docker exec -it incident-auto-remediation-postgres-1 psql -U postgres -d inciden
 ```
 (`55`, not `50` — this row accumulated alerts across multiple test sessions
 over several days, which is itself evidence dedup works correctly even
-across container restarts, not just within one run. See debugging log #8.)
+across container restarts, not just within one run.)
 
 **Run the test suite:**
 ```bash
@@ -277,7 +275,7 @@ python3 -m orchestrator.worker
 Should print `Worker started. Polling task queue 'incident-triage' on localhost:7233...`
 
 ⚠️ **Restart this process after any code change** — Python doesn't
-hot-reload (debugging log #13).
+hot-reload 
 
 **Terminal 4 — the actual demo:**
 ```bash
@@ -540,7 +538,7 @@ docker exec -i incident-auto-remediation-postgres-1 psql -U postgres -d incident
 ```
 
 ⚠️ Restart the Temporal worker after applying these — the workflow itself
-changed to include `propose_commands_activity` (debugging log #13).
+changed to include `propose_commands_activity` 
 
 Trigger a fresh incident (same as Phase 2's demo), then approve a command:
 ```bash
@@ -562,8 +560,7 @@ _(mock LLM output — set ANTHROPIC_API_KEY for real synthesis)_
 
 **Approving and executing should show the full real chain** — this is
 actual captured output from a live run, including the corrected
-verification outcome (see `docs/DEBUGGING_LOG.md` #15 for the direction
-bug this caught and fixed):
+verification outcome .
 ```
 Policy check: APPROVED — 'modify_infra' is reversible with low blast radius — within auto-dispatch policy
 Dispatching modify_infra({'action': 'restart', 'service': 'checkout-api', 'target_url': 'http://localhost:8080'}) ...
@@ -628,7 +625,7 @@ pytest tests/ -v
 ```
 All 39 tests pass: 5 (dedup) + 8 (diagnostics) + 7 (IAR chat) + 5 (policy) + 14 (command executor).
 
-## Known gotchas (see `docs/DEBUGGING_LOG.md` for full detail on each)
+## Known gotchas 
 
 1. **Postgres data persists across `docker-compose up` restarts.** If a
    dedup test shows `is_new: False` unexpectedly, it's very likely matching
@@ -640,7 +637,7 @@ All 39 tests pass: 5 (dedup) + 8 (diagnostics) + 7 (IAR chat) + 5 (policy) + 14 
    `psql`, or reset with `down -v`.
 3. **The worker process doesn't hot-reload.** Restart it after any code
    change, including new activities (Phase 4's `propose_commands_activity`
-   hit this directly — see debugging log #13).
+   hit this directly ).
 4. **`ingestion` runs in Docker, Temporal runs on the host** —
    `host.docker.internal:7233`, not `localhost:7233`, is required for the
    ingestion container to reach Temporal. Already handled in
@@ -654,7 +651,7 @@ All 39 tests pass: 5 (dedup) + 8 (diagnostics) + 7 (IAR chat) + 5 (policy) + 14 
    change.** A statistically large improvement and a large degradation both
    register as "anomalous" — classification logic has to check which
    direction the metric moved, not just that it moved a lot. This was a
-   real bug (debugging log #15), not just a gotcha to configure around.
+   real bug , not just a gotcha to configure around.
 
 ## Roadmap (not built)
 

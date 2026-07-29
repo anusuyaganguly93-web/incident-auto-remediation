@@ -2,9 +2,7 @@
 
 This document captures the *why* behind the system — the design decisions made
 before any code was written, and the constraints they were made against. For
-*how to run it*, see [README.md](../README.md). For a chronological account of
-what broke during implementation and how it was fixed, see
-[DEBUGGING_LOG.md](DEBUGGING_LOG.md).
+*how to run it*, see [README.md](../README.md). 
 
 ## The problem, framed
 
